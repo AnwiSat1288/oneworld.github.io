@@ -1,4 +1,14 @@
 
+        const firebaseConfig = {
+              apiKey: "AIzaSyCFU1OjM0k92TwxMoZFJzVTsBt3ay87oyM",
+              authDomain: "one-world-github-pages.firebaseapp.com",
+              projectId: "one-world-github-pages",
+              storageBucket: "one-world-github-pages.appspot.com",
+              messagingSenderId: "385838863817",
+              appId: "1:385838863817:web:64cedc14591327081f0418",
+              measurementId: "G-TRDX1DL84J"
+        };
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
