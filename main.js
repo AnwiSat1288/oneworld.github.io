@@ -1,4 +1,4 @@
-// Initialize Firebase with your configuration
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
