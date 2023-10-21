@@ -40,16 +40,29 @@ function signup() {
         return;
     }
 
-    auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-      
-            const user = userCredential.user;
-          
-        })
-        .catch((error) => {
-            console.error(error);
-        
-        });
+ auth.createUserWithEmailAndPassword(email, password)
+  .then(function() {
+    
+    var user = auth.currentUser
+    var database_ref = database.ref()
+    var user_data = {
+      email : email,
+      username : username,
+   
+    }
+
+
+    database_ref.child('users/' + user.uid).set(user_data)
+    alert('User Created')
+  })
+  .catch(function(error) {
+   
+    var error_code = error.code
+    var error_message = error.message
+
+    alert(error_message)
+  })
+}
 }
 
 
