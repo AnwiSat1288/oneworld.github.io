@@ -10,8 +10,8 @@ function login() {
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log('Logged in as:', user.email);
-    
+      const successMessage = `Logged in as: ${user.email}`;
+      displaySuccessMessage(successMessage);
     })
     .catch((error) => {
    
@@ -29,7 +29,8 @@ function signup() {
     .then((userCredential) => {
       // User created successfully
       const user = userCredential.user;
-      console.log('User created:', user.email);
+      const successMessage = `User created: ${user.email}`;
+      displaySuccessMessage(successMessage);
      
     })
     .catch((error) => {
@@ -38,7 +39,17 @@ function signup() {
 
     });
 }
+function displaySuccessMessage(message) {
+  const successMessageDiv = document.createElement('div');
+  successMessageDiv.className = 'success-message';
+  successMessageDiv.textContent = message;
+  document.body.appendChild(successMessageDiv);
 
+  // Automatically remove the message after a few seconds
+  setTimeout(() => {
+    successMessageDiv.remove();
+  }, 3000); // Adjust the time (in milliseconds) as needed
+}
 // Event listeners for login and signup forms
 document.querySelector('#login button').addEventListener('click', login);
 document.querySelector('#createAccount button').addEventListener('click', signup);
