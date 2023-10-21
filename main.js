@@ -8,64 +8,69 @@ var firebaseConfig = {
   appId: "1:385838863817:web:64cedc14591327081f0418",
   measurementId: "G-TRDX1DL84J"
 };
+
 firebase.initializeApp(firebaseConfig);
+
+
 const auth = firebase.auth();
-const auth = firebase.database();
+const database = firebase.database();
+
+
 function login() {
-    const emailOrUsername = document.getElementById('loginUsername').value;
+    const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
-    auth.signInWithEmailAndPassword(emailOrUsername, password)
+
+    auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-          
+            const successMessage = `Logged in as: ${user.email}`;
+            displaySuccessMessage(successMessage);
         })
         .catch((error) => {
             console.error(error);
-      
         });
 }
 
-// Signup function
 function signup() {
-  const username = document.getElementById('signupUsername').value;
+    const username = document.getElementById('signupUsername').value;
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-
     if (password !== confirmPassword) {
-      
         console.error("Passwords do not match");
-      
         return;
     }
 
- auth.createUserWithEmailAndPassword(email, password)
-  .then(function() {
-    
-    var user = auth.currentUser
-    var database_ref = database.ref()
-    var user_data = {
-      email : email,
-      username : username,
-   
-    }
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            const successMessage = `User created: ${user.email}`;
+            displaySuccessMessage(successMessage);
 
+            // Store user data in the Firebase Realtime Database
+            const userData = {
+                username: username,
+                email: email,
+            };
 
-    database_ref.child('users/' + user.uid).set(user_data)
-    alert('User Created')
-  })
-  .catch(function(error) {
-   
-    var error_code = error.code
-    var error_message = error.message
-
-    alert(error_message)
-  })
-}
+            database.ref('users/' + user.uid).set(userData);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 }
 
+function displaySuccessMessage(message) {
+    const successMessageDiv = document.createElement('div');
+    successMessageDiv.className = 'success-message';
+    successMessageDiv.textContent = message;
+    document.body.appendChild(successMessageDiv);
 
-document.querySelector('#login button').addEventListener('click', login);
-document.querySelector('#createAccount button').addEventListener('click', signup);
+    setTimeout(() => {
+        successMessageDiv.remove();
+    }, 3000); 
+}
 
+document.getElementById('loginButton').addEventListener('click', login);
+document.getElementById('signupButton').addEventListener('click', signup);
