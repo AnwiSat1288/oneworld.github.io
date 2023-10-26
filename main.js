@@ -16,11 +16,13 @@ const database = firebase.database();
 
 function login() {
     // Function to handle the login process
+    console.log("Login button clicked.");
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+            console.log("Login Successful!");
             const user = userCredential.user;
             const successMessage = `Logged in as: ${user.email}`;
             displaySuccessMessage(successMessage);
@@ -29,7 +31,7 @@ function login() {
             window.location.href = 'profile.html';
         })
         .catch((error) => {
-            console.error(error);
+             console.error("Login failed:", error);
             const errorMessage = `Login failed: ${error.message}`;
             displayErrorMessage(errorMessage);
         });
