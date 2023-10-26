@@ -30,9 +30,21 @@ function login() {
         })
         .catch((error) => {
             console.error(error);
+            const errorMessage = `Login failed: ${error.message}`;
+            displayErrorMessage(errorMessage);
         });
 }
 
+function displayErrorMessage(message) {
+    const errorMessageDiv = document.createElement('div');
+    errorMessageDiv.className = 'error-message';
+    errorMessageDiv.textContent = message;
+    document.body.appendChild(errorMessageDiv);
+
+    setTimeout(() => {
+        errorMessageDiv.remove();
+    }, 3000);
+}
 function signup() {
     // Function to handle the signup process
     const username = document.getElementById('signupUsername').value;
