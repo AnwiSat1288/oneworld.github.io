@@ -61,7 +61,7 @@
       
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-             
+                 console.log("reached");
                 window.location.href = 'profile.html'; // Change to the correct path
             }
         });
