@@ -11,12 +11,11 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
 const auth = firebase.auth();
 const database = firebase.database();
 
-
 function login() {
+    // Function to handle the login process
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
 
@@ -25,6 +24,9 @@ function login() {
             const user = userCredential.user;
             const successMessage = `Logged in as: ${user.email}`;
             displaySuccessMessage(successMessage);
+
+            // Redirect to the profile page after a successful login
+            window.location.href = 'profile.html';
         })
         .catch((error) => {
             console.error(error);
@@ -32,6 +34,7 @@ function login() {
 }
 
 function signup() {
+    // Function to handle the signup process
     const username = document.getElementById('signupUsername').value;
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
@@ -62,6 +65,7 @@ function signup() {
 }
 
 function displaySuccessMessage(message) {
+    // Function to display a success message
     const successMessageDiv = document.createElement('div');
     successMessageDiv.className = 'success-message';
     successMessageDiv.textContent = message;
@@ -72,5 +76,6 @@ function displaySuccessMessage(message) {
     }, 3000); 
 }
 
+// Event listeners for the login and signup buttons
 document.getElementById('loginButton').addEventListener('click', login);
 document.getElementById('signupButton').addEventListener('click', signup);
