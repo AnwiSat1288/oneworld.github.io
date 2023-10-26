@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Profile Form</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <form class="form" id="userProfile">
+            <h1 class="form__title">Profile</h1>
+            <div class="form__message form__message--success" id="profileSuccessMessage"></div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="Name" id="name">
+            </div>
+            <div class="form__input-group">
+                <label>
+                    <input type="checkbox" id="hasAllergies"> Has Allergies
+                </label>
+            </div>
+            <div class="form__input-group">
+                <label>
+                    <input type="checkbox" id="hasFoodRestriction"> Has Food Restriction
+                </label>
+            </div>
+            <div class="form__input-group">
+                <select id="ethnicity">
+                    <option value="Caucasian">Caucasian</option>
+                    <option value="African American">African American</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="form__input-group">
+                <input type="number" class="form__input" placeholder="Age" id="age">
+            </div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" placeholder="Address" id="address">
+            </div>
+            <button class="form__button" type="submit" id="updateProfileButton">Update Profile</button>
+        </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="./profile.js"></script>
+</body>
+</html>
